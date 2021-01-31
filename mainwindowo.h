@@ -9,7 +9,7 @@
 
 #include "TCanvas.h"
 #include "TH1.h"
-//github works???
+//no way???
 
 namespace Ui {
 class MainWindowo;
