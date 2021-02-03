@@ -44,6 +44,27 @@ MainWindowo::MainWindowo(QWidget *parent) :
     for (Int_t i=0;i<10000;i++) {
         final.Fill(source.GetRandom());
     }
+
+
+    QListWidget * lw = ui->padLayoutlw;
+    lw->setMaximumHeight(150);
+    //lw->verticalHeader()->setSectionsMovable(true);
+    lw->setDropIndicatorShown(true);
+    //lw->setColumnCount(1);
+    //lw->setRowCount(1);
+    //lw->setHorizontalHeaderLabels(QStringList("a1"));
+    //lw->verticalHeader()->setSectionsMovable(true);
+    lw->setDropIndicatorShown(true);
+    lw->setSelectionMode(QAbstractItemView::SingleSelection);
+    lw->setMovement(QListView::Free);
+    lw->setDragEnabled(true);
+    lw->viewport()->setAcceptDrops(true);
+    lw->setDragDropMode(QAbstractItemView::InternalMove);
+    //QListWidgetItem::flags(Qt::ItemIsDragEnabled);
+    //Qt::ItemIsDragEnabled;
+
+
+    updatelw();
 }
 
 
@@ -65,6 +86,28 @@ void MainWindowo::stopRootUpdate()
 void MainWindowo::timerTimeout()
 {
     gSystem->ProcessEvents();
+}
+
+void MainWindowo::updatelw()
+{
+    QListWidget * lw = ui->padLayoutlw;
+
+    qDebug() << "lenght" <<padLayoutv.length();
+
+    for (int i = 0; i<padLayoutv.length(); i++ )
+    {
+        int npad = padLayoutv[i];
+
+        qDebug() << "npad" << npad;
+
+        QSpinBox *sb = new QSpinBox;
+        sb->setValue(npad);
+        QListWidgetItem *newItem = new QListWidgetItem;
+        //newItem->setText(QString::number(npad));
+        lw->addItem(newItem);
+         lw->setItemWidget(newItem, sb);
+
+    }
 }
 
 void MainWindowo::on_pushButton_clicked()
@@ -199,3 +242,4 @@ void MainWindowo::on_pushButton_2_clicked()
     hei = tpad->GetBBox().fHeight;
     qDebug() <<"toooooooooooooooooooooooooooop" << hei;
 }
+

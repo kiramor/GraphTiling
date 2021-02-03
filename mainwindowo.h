@@ -6,6 +6,11 @@
 #include <QThread>
 #include <QTimer>
 #include <QDebug>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <QTableWidget>
+#include <QSpinBox>
+#include <QCheckBox>
 
 #include "TCanvas.h"
 #include "TH1.h"
@@ -29,8 +34,12 @@ public:
     TH1F final;
 
 
+
 private:
     Ui::MainWindowo *ui;
+
+    QVector<int> padLayoutv = {1, 2, 3, 4, 5};
+
     //int divX = 1;
     //int divY = 1;
     //QVector<> pads;
@@ -48,6 +57,7 @@ private:
 
 private slots:
     void timerTimeout(); //timer-based update of Root events
+    void updatelw();
 
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
